@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahdi Nazzalul Ahsan | Data Scientist & Data Analyst Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        accent: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        },
+                        darkbg: '#0f172a',
+                        cardbg: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js for data visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3);
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-slate-800/80 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#hero" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-emerald-400 flex items-center justify-center font-bold text-white text-xl shadow-lg group-hover:scale-105 transition-transform">
+                        A
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-wide text-white group-hover:text-emerald-400 transition-colors">Ahdi Nazzalul A.</span>
+                        <span class="block text-xs text-indigo-400 font-mono">B.Sc. Mathematics | UI</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-emerald-400 transition-colors">About</a>
+                    <a href="#projects" class="text-slate-300 hover:text-emerald-400 transition-colors">ML/AI Projects</a>
+                    <a href="#skills" class="text-slate-300 hover:text-emerald-400 transition-colors">Skills</a>
+                    <a href="#education" class="text-slate-300 hover:text-emerald-400 transition-colors">Education & Thesis</a>
+                    <a href="#experience" class="text-slate-300 hover:text-emerald-400 transition-colors">Experience</a>
+                    <a href="#certifications" class="text-slate-300 hover:text-emerald-400 transition-colors">Certifications</a>
+                    <a href="#contact" class="px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 text-white font-semibold transition-all shadow-md hover:shadow-indigo-500/20">
+                        Contact Me
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-slate-200 hover:bg-slate-800">About</a>
+            <a href="#projects" class="mobile-link block px-3 py-2 rounded-md text-slate-200 hover:bg-slate-800">ML/AI Projects</a>
+            <a href="#skills" class="mobile-link block px-3 py-2 rounded-md text-slate-200 hover:bg-slate-800">Skills</a>
+            <a href="#education" class="mobile-link block px-3 py-2 rounded-md text-slate-200 hover:bg-slate-800">Education & Thesis</a>
+            <a href="#experience" class="mobile-link block px-3 py-2 rounded-md text-slate-200 hover:bg-slate-800">Experience</a>
+            <a href="#certifications" class="mobile-link block px-3 py-2 rounded-md text-slate-200 hover:bg-slate-800">Certifications</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-md bg-indigo-600 text-white text-center font-medium">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
+        <!-- Background Canvas Animation -->
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full opacity-30 pointer-events-none"></canvas>
+
+        <!-- Ambient Glow Effects -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Main Info -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>Open for Data Analyst & Data Scientist Roles</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Hello, I'm <br class="hidden sm:inline"/>
+                        <span class="bg-gradient-to-r from-indigo-400 via-emerald-300 to-teal-200 bg-clip-text text-transparent">Ahdi Nazzalul Ahsan</span>
+                    </h1>
+
+                    <div class="text-xl sm:text-2xl font-medium text-slate-300 h-10 flex items-center justify-center lg:justify-start">
+                        <span class="text-indigo-400 font-mono">&gt;&nbsp;</span>
+                        <span id="typed-text" class="font-mono text-emerald-400 font-semibold"></span>
+                        <span class="w-0.5 h-6 bg-indigo-400 inline-block ml-1 animate-pulse"></span>
+                    </div>
+
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed mx-auto lg:mx-0">
+                        Mathematics graduate from Universitas Indonesia (GPA 3.11/4.00) & Certified BNSP Data Scientist. Experienced in developing Machine Learning, Deep Learning, Computer Vision models, and applied statistical analysis to drive precise data-driven decision-making.
+                    </p>
+
+                    <!-- Contact & CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+                        <a href="mailto:ahdiahsan0@gmail.com" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-2 transition-all shadow-lg shadow-indigo-600/30 hover:scale-105">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>ahdiahsan0@gmail.com</span>
+                        </a>
+                        <a href="https://linkedin.com/in/ahdi-nazzalul-ahsan" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl glass-panel hover:bg-slate-800 text-slate-200 font-medium flex items-center space-x-2 border border-slate-700 transition-all hover:scale-105">
+                            <i class="fa-brands fa-linkedin text-blue-400 text-lg"></i>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                        <a href="https://wa.me/6288221108571" target="_blank" class="px-4 py-3 rounded-xl glass-panel hover:bg-slate-800 text-emerald-400 font-medium flex items-center space-x-2 border border-emerald-500/30 transition-all hover:scale-105">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Metrics Chips -->
+                    <div class="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-slate-800/80">
+                        <div class="glass-card p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-2xl font-bold text-emerald-400 font-mono">3.11 / 4.00</div>
+                            <div class="text-xs text-slate-400 mt-1">GPA B.Sc. Math UI</div>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-2xl font-bold text-indigo-400 font-mono">96.67%</div>
+                            <div class="text-xs text-slate-400 mt-1">Best DL Accuracy</div>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl border border-slate-800 col-span-2 sm:col-span-1">
+                            <div class="text-2xl font-bold text-teal-300 font-mono">BNSP Certified</div>
+                            <div class="text-xs text-slate-400 mt-1">Competent Data Scientist</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Interactive Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-full max-w-md glass-panel p-6 rounded-2xl border border-slate-700/60 shadow-2xl relative glow-effect">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="text-xs font-mono text-indigo-400"><i class="fa-solid fa-code"></i> ahdi_profile.py</span>
+                        </div>
+
+                        <div class="py-4 space-y-3 font-mono text-xs sm:text-sm">
+                            <p class="text-slate-400"><span class="text-purple-400">class</span> <span class="text-yellow-300">DataScientist</span>:</p>
+                            <p class="pl-4 text-slate-300"><span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(self):</p>
+                            <p class="pl-8 text-slate-400">self.name = <span class="text-emerald-300">"Ahdi Nazzalul Ahsan"</span></p>
+                            <p class="pl-8 text-slate-400">self.degree = <span class="text-emerald-300">"B.Sc. in Mathematics, UI"</span></p>
+                            <p class="pl-8 text-slate-400">self.focus = [<span class="text-emerald-300">"Machine Learning"</span>, <span class="text-emerald-300">"Deep Learning"</span>, <span class="text-emerald-300">"Computer Vision"</span>]</p>
+                            <p class="pl-8 text-slate-400">self.certification = <span class="text-emerald-300">"LSP TIK Global (BNSP)"</span></p>
+                            
+                            <p class="pl-4 text-slate-300 mt-2"><span class="text-purple-400">def</span> <span class="text-blue-400">get_impact</span>(self):</p>
+                            <p class="pl-8 text-slate-400"><span class="text-purple-400">return</span> <span class="text-emerald-300">"Transforming unstructured & tabular data into strategic decisions"</span></p>
+                        </div>
+
+                        <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                            <span class="flex items-center space-x-1">
+                                <i class="fa-solid fa-location-dot text-indigo-400"></i>
+                                <span>Depok / Kudus, Indonesia</span>
+                            </span>
+                            <span class="flex items-center space-x-1 text-emerald-400">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Verified Competent</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900/50 border-y border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs uppercase font-semibold text-indigo-400 tracking-wider">Professional Summary</h2>
+                <p class="text-3xl font-extrabold text-white mt-1">Bridging Mathematical Foundations with AI Technology</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/50 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl mb-4">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Mathematics Degree (UI)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Strong mathematical, statistical, and computational background from Universitas Indonesia to construct robust data modeling algorithms.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl mb-4">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Deep Learning & CV Expert</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Proficient in processing unstructured image data using EfficientNet, YOLO, OpenCV, PyTorch, and TensorFlow with advanced augmentation (MixUp & CutMix).
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-teal-500/50 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 text-2xl mb-4">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">End-to-End Data Science</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Skilled in managing full end-to-end data workflows: business understanding, data quality validation, feature engineering, modeling, and business evaluation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs uppercase font-semibold text-emerald-400 tracking-wider">Project Portfolio</h2>
+                    <p class="text-3xl font-extrabold text-white mt-1">Case Studies & Machine Learning Models</p>
+                </div>
+
+                <!-- Project Filters -->
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="project-filters">
+                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-indigo-600 text-white">All</button>
+                    <button data-filter="ml" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-300 hover:text-white">Machine Learning</button>
+                    <button data-filter="cv" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-300 hover:text-white">Computer Vision</button>
+                    <button data-filter="ai" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-300 hover:text-white">GenAI & Web</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+                
+                <!-- Project 1: PDAM Revenue Optimization -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-indigo-500/50 transition-all flex flex-col" data-category="ml">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                                    BNSP Certification Project
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">July 2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">PDAM Revenue Optimization using Machine Learning</h3>
+                            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                                End-to-end data science project optimizing PDAM Surabaya's revenue through predictive modeling of customer tariff categories and water usage cost regression.
+                            </p>
+                            
+                            <!-- Highlights -->
+                            <ul class="text-xs text-slate-400 space-y-1.5 mb-6 list-disc list-inside">
+                                <li>Classification: Logistic Regression & Random Forest</li>
+                                <li>Regression: Linear Regression & Random Forest Regressor</li>
+                                <li>Evaluation: 5-Fold Cross Validation (ROC-AUC, RMSE, MAE, R²)</li>
+                                <li>Data Cleaning, Feature Engineering & Exploratory Data Analysis</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Python</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Pandas</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Scikit-Learn</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Matplotlib</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">NumPy</span>
+                            </div>
+                            <button onclick="openProjectModal('pdam')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center space-x-2 transition-colors">
+                                <i class="fa-solid fa-chart-pie"></i>
+                                <span>View Details & Model Performance</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Traditional House Image Classification -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-emerald-500/50 transition-all flex flex-col" data-category="cv">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
+                                    Computer Vision / Transfer Learning
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">May 2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Indonesian Traditional House Image Classification</h3>
+                            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                                Image classification of 6 Indonesian traditional house types using EfficientNet-B3 architecture with a two-stage transfer learning strategy.
+                            </p>
+
+                            <!-- Metrics Highlight -->
+                            <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-slate-900/80 mb-6 text-center border border-slate-800">
+                                <div>
+                                    <div class="text-xs text-slate-400">Accuracy</div>
+                                    <div class="text-base font-bold text-emerald-400 font-mono">96.67%</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Precision</div>
+                                    <div class="text-base font-bold text-indigo-400 font-mono">96.83%</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Macro F1</div>
+                                    <div class="text-base font-bold text-teal-300 font-mono">96.66%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">EfficientNet-B3</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">OpenCV</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">PyTorch/TF</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">1,200 Images</span>
+                            </div>
+                            <button onclick="openProjectModal('rumah')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center space-x-2 transition-colors">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>View Experiment Details</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Brain Tumor Classification and Detection -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-teal-500/50 transition-all flex flex-col" data-category="cv ai">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/10 border border-teal-500/30 text-teal-400">
+                                    Bioinformatics & AI Medical
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">Dec 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Brain Tumor Classification & Detection System</h3>
+                            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                                Deep Learning pipeline (EfficientNet-B0 & YOLOv11) to classify 3 tumor types and locate lesions on MRI images, integrated with a web portal, hospital geolocation, and GenAI Virtual Assistant.
+                            </p>
+
+                            <ul class="text-xs text-slate-400 space-y-1.5 mb-6 list-disc list-inside">
+                                <li>Classification of 3 brain tumor types via EfficientNet-B0</li>
+                                <li>Precise lesion location detection with YOLOv11</li>
+                                <li>Integration of nearby hospital geolocation & AI Virtual Assistant</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">YOLOv11</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">EfficientNet-B0</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Generative AI</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Geolocation</span>
+                            </div>
+                            <button onclick="openProjectModal('tumor')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center space-x-2 transition-colors">
+                                <i class="fa-solid fa-notes-medical"></i>
+                                <span>View System Architecture</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Offside Detection with YOLOv8 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col" data-category="cv">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/30 text-amber-400">
+                                    Sports Analytics / Web Mining
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">Jun 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Offside Detection with YOLOv8</h3>
+                            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                                Real-time automated offside detection system identifying players, referees, and the ball, calculating perspective field lines using vanishing point and jersey color K-Means clustering.
+                            </p>
+
+                            <!-- Metrics Grid -->
+                            <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-slate-900/80 mb-6 text-center border border-slate-800">
+                                <div>
+                                    <div class="text-xs text-slate-400">Precision</div>
+                                    <div class="text-base font-bold text-amber-400 font-mono">90.9%</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Recall</div>
+                                    <div class="text-base font-bold text-emerald-400 font-mono">83.0%</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">mAP50</div>
+                                    <div class="text-base font-bold text-indigo-400 font-mono">83.2%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">YOLOv8</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">OpenCV</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">K-Means Clustering</span>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-indigo-300">Geometry Lines</span>
+                            </div>
+                            <button onclick="openProjectModal('offside')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center space-x-2 transition-colors">
+                                <i class="fa-solid fa-futbol"></i>
+                                <span>View Metrics & Geo Methods</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Data Science Playground Section -->
+    <section class="py-16 bg-slate-900/80 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 rounded-3xl border border-indigo-500/30 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+                            <i class="fa-solid fa-flask"></i> Interactive Showcase
+                        </span>
+                        <h3 class="text-2xl font-bold text-white">Data Classification Prediction Simulator</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Try this interactive simulation to observe how feature parameters directly impact Machine Learning / Deep Learning model performance scores.
+                        </p>
+                        <div class="text-xs text-slate-400 font-mono">
+                            Status: <span class="text-emerald-400">Model Loaded & Active</span>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-5">
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-xs font-medium text-slate-300">
+                                <span>Feature A: Data Quality / Image Volume (Dataset Size)</span>
+                                <span id="val-a" class="text-emerald-400 font-mono">85%</span>
+                            </div>
+                            <input type="range" id="slider-a" min="10" max="100" value="85" class="w-full accent-emerald-500 bg-slate-800 rounded-lg h-2 cursor-pointer">
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-xs font-medium text-slate-300">
+                                <span>Feature B: Augmentation & Fine-Tuning Intensity (MixUp/CutMix)</span>
+                                <span id="val-b" class="text-indigo-400 font-mono">75%</span>
+                            </div>
+                            <input type="range" id="slider-b" min="10" max="100" value="75" class="w-full accent-indigo-500 bg-slate-800 rounded-lg h-2 cursor-pointer">
+                        </div>
+
+                        <!-- Result Box -->
+                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs text-slate-400">Estimated Accuracy / F1-Score:</div>
+                                <div id="sim-result" class="text-2xl font-bold font-mono text-emerald-400">95.40%</div>
+                            </div>
+                            <div class="text-right">
+                                <span id="sim-status" class="px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                    High Confidence
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Matrix Section -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase font-semibold text-indigo-400 tracking-wider">Skills & Core Stack</h2>
+                <p class="text-3xl font-extrabold text-white mt-1">Technologies & Frameworks Mastered</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Hard Skills: Data Science & ML -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-lg border border-indigo-500/30">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Machine Learning & Data</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-300">Python (Pandas, NumPy, Scikit-learn)</span>
+                                <span class="text-indigo-400">Advanced</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full w-[92%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-300">Data Visualization (Matplotlib, Seaborn)</span>
+                                <span class="text-indigo-400">Advanced</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full w-[88%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-300">Predictive Modeling & Statistical Analysis</span>
+                                <span class="text-indigo-400">Advanced</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full w-[90%] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Learning & Computer Vision -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-lg border border-emerald-500/30">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Deep Learning & CV</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-300">TensorFlow / PyTorch</span>
+                                <span class="text-emerald-400">Advanced</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full w-[85%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-300">YOLO (v8, v11) & Object Detection</span>
+                                <span class="text-emerald-400">Advanced</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full w-[88%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-300">OpenCV Image Processing</span>
+                                <span class="text-emerald-400">Advanced</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full w-[86%] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools, Web & Soft Skills -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-400 text-lg border border-teal-500/30">
+                            <i class="fa-solid fa-wrench"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Tools & Soft Skills</h3>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Tools & Tech:</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 border border-slate-700">Flask</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 border border-slate-700">LaTeX</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 border border-slate-700">MS Excel</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 border border-slate-700">Canva</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 border border-slate-700">Git / GitHub</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Soft Skills & Languages:</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-xs text-indigo-300 border border-indigo-500/30">Analytical Thinking</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-xs text-indigo-300 border border-indigo-500/30">Problem Solving</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-xs text-indigo-300 border border-indigo-500/30">Critical Thinking</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-xs text-indigo-300 border border-indigo-500/30">Teamwork & Communication</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-xs text-emerald-300 border border-emerald-500/30">Indonesian (Native)</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-xs text-emerald-300 border border-emerald-500/30">English (Proficient)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Thesis Section -->
+    <section id="education" class="py-20 bg-slate-900/50 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase font-semibold text-emerald-400 tracking-wider">Academic Background</h2>
+                <p class="text-3xl font-extrabold text-white mt-1">Education & Thesis Spotlight</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Main Degree: Universitas Indonesia -->
+                <div class="lg:col-span-7 glass-panel p-8 rounded-3xl border border-indigo-500/30 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                    Bachelor of Science (B.Sc.)
+                                </span>
+                                <h3 class="text-2xl font-bold text-white mt-3">Universitas Indonesia</h3>
+                                <p class="text-indigo-400 font-medium text-sm">Bachelor of Science in Mathematics | Depok, Indonesia</p>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                                Aug 2022 – Jul 2026
+                            </span>
+                        </div>
+
+                        <div class="mt-4 flex items-center space-x-2">
+                            <span class="text-sm font-semibold text-slate-300">GPA:</span>
+                            <span class="text-lg font-bold text-emerald-400 font-mono">3.11 / 4.00</span>
+                        </div>
+
+                        <!-- Relevant Coursework -->
+                        <div class="mt-6">
+                            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Relevant Coursework:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-slate-800/80 text-xs text-slate-300 border border-slate-700">Data Science</span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-800/80 text-xs text-slate-300 border border-slate-700">Computational Intelligence</span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-800/80 text-xs text-slate-300 border border-slate-700">Digital Image Processing</span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-800/80 text-xs text-slate-300 border border-slate-700">Web Mining</span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-800/80 text-xs text-slate-300 border border-slate-700">Bioinformatics & AI</span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-800/80 text-xs text-slate-300 border border-slate-700">Unstructured Data Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thesis Spotlight Box -->
+                    <div class="mt-8 p-5 rounded-2xl bg-slate-950 border border-slate-800">
+                        <div class="flex items-center space-x-2 text-xs font-semibold text-emerald-400 mb-2">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Bachelor’s Thesis:</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-white leading-snug">
+                            "Performance Analysis of Fine-Tuned EfficientNet with MixUp and CutMix Techniques for Skin Condition Classification on Human Facial Images"
+                        </h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                            Analyzed classification performance of human facial skin conditions by integrating state-of-the-art data augmentation techniques (MixUp & CutMix) into fine-tuned EfficientNet models to mitigate overfitting and boost generalization.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Secondary Education: MA NU TBS Kudus -->
+                <div class="lg:col-span-5 glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/30">
+                                    Secondary Education
+                                </span>
+                                <h3 class="text-xl font-bold text-white mt-3">MA NU TBS Kudus</h3>
+                                <p class="text-slate-400 text-sm">Science Major (MIPA) | Kudus, Indonesia</p>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
+                                2019 – 2022
+                            </span>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2">
+                            <div class="text-xs text-slate-400">Final Average Score:</div>
+                            <div class="text-3xl font-extrabold text-teal-400 font-mono">9.2 / 10.0</div>
+                            <p class="text-xs text-slate-400 pt-1">
+                                Established strong core foundations in mathematics, analytical logic, and natural sciences prior to pursuing higher education at UI.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-300 flex items-center space-x-3">
+                        <i class="fa-solid fa-award text-xl"></i>
+                        <span>Consistent academic track record with strong analytical excellence.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizational & Community Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase font-semibold text-indigo-400 tracking-wider">Experience & Leadership</h2>
+                <p class="text-3xl font-extrabold text-white mt-1">Organizational & Community Engagement</p>
+            </div>
+
+            <div class="relative border-l-2 border-slate-800 ml-4 md:ml-32 space-y-12">
+                
+                <!-- Exp 1: Himpunan Mahasiswa Matematika UI -->
+                <div class="relative pl-8 md:pl-10">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-slate-950"></div>
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-white">Mathematics Student Association, Universitas Indonesia</h3>
+                            <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/30 w-fit">
+                                Apr 2024 – Jun 2025 | Depok
+                            </span>
+                        </div>
+                        <div class="text-sm font-semibold text-slate-300 mb-2">Expert Staff, Symmetry Department</div>
+                        <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                            <li>Assisted in planning and organizing religious programs and student activities.</li>
+                            <li>Collaborated with committee members to coordinate events and ensure successful execution.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exp 2: Community Service Grant Program UI - Samosir -->
+                <div class="relative pl-8 md:pl-10">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-slate-950"></div>
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-white">Community Service Grant Program, Universitas Indonesia</h3>
+                            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/30 w-fit">
+                                Jul 2024 – Sep 2024 | Samosir, North Sumatra
+                            </span>
+                        </div>
+                        <div class="text-sm font-semibold text-slate-300 mb-2">Project Team Member</div>
+                        <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                            <li>Managed operational and logistical arrangements for the community service program, including coordinating travel arrangements, ticketing, and team requirements for smooth execution.</li>
+                            <li>Conducted field surveys and interviews with local communities and the principal of SMK Negeri 1 Simanindo, supporting tourism mapping activities that identified 3 sub-geosites, 5 tourist attractions, and 5 ports, and contributed to developing the Geosite Amtuto tourism map.</li>
+                            <li>Supported workshops, digital marketing education, and English Fun Learning activities for local students, engaging 50 participants in tourism socialization and 78 students in a digitalization workshop (80% installed and practiced editing/design applications).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exp 3: Disaster Education Community Service -->
+                <div class="relative pl-8 md:pl-10">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-teal-500 ring-4 ring-slate-950"></div>
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-white">Community Service Program: Disaster Education & Simulation</h3>
+                            <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/30 w-fit">
+                                Oct 2023 | Depok
+                            </span>
+                        </div>
+                        <div class="text-sm font-semibold text-slate-300 mb-2">Project Team Member</div>
+                        <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                            <li>Contributed to organizing a community service program on disaster education and mitigation for mosque leaders in Depok.</li>
+                            <li>Assisted in coordinating educational workshops and disaster simulation activities to enhance community disaster preparedness.</li>
+                            <li>Collaborated with the project team to support program implementation and community engagement.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exp 4: LOGIKA UI 2024 -->
+                <div class="relative pl-8 md:pl-10">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-amber-500 ring-4 ring-slate-950"></div>
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-white">LOGIKA UI 2024</h3>
+                            <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30 w-fit">
+                                Aug 2023 – Apr 2024 | Depok
+                            </span>
+                        </div>
+                        <div class="text-sm font-semibold text-slate-300 mb-2">Academic Staff</div>
+                        <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                            <li>Developed and reviewed mathematics competition problems for LOGIKA UI 2024.</li>
+                            <li>Ensured high quality, accuracy, and fairness across all national competition materials.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & Training Section -->
+    <section id="certifications" class="py-20 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase font-semibold text-emerald-400 tracking-wider">Official Credentials</h2>
+                <p class="text-3xl font-extrabold text-white mt-1">Certifications & Professional Training</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Cert 1: BNSP -->
+                <div class="glass-panel p-6 rounded-2xl border border-emerald-500/40 relative overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                Competent
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Data Scientist Competency Assessment</h3>
+                        <p class="text-xs text-indigo-400 font-medium mb-3">LSP TIK Global (Licensed by BNSP)</p>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Official national professional competency assessment for Data Scientists recognized by the National Agency for Professional Certification (BNSP).
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                        <span>Passed: August 2026</span>
+                        <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                    </div>
+                </div>
+
+                <!-- Cert 2: Data Science Center UI -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+                                CBT Training
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Data Scientist Competency-Based Training</h3>
+                        <p class="text-xs text-indigo-400 font-medium mb-3">Data Science Center, Universitas Indonesia</p>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Comprehensive competency-based training covering data modeling, evaluation, and end-to-end deployment pipelines.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                        <span>Completed: July 2026</span>
+                        <i class="fa-solid fa-graduation-cap text-indigo-400"></i>
+                    </div>
+                </div>
+
+                <!-- Cert 3: AI For Everyone KORIKA -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 text-2xl">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-teal-500/20 text-teal-300 border border-teal-500/40">
+                                Certified
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">AI For Everyone</h3>
+                        <p class="text-xs text-indigo-400 font-medium mb-3">KORIKA (Indonesia AI Research & Innovation Collaboration)</p>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            In-depth understanding of Artificial Intelligence implementation strategies and the national AI ecosystem.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                        <span>Completed: March 2026</span>
+                        <i class="fa-solid fa-lightbulb text-teal-400"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs uppercase font-semibold text-emerald-400 tracking-wider">Get In Touch</span>
+                    <h2 class="text-3xl font-extrabold text-white">Interested in Working Together or Hiring?</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        I am open to career opportunities as a <strong class="text-slate-200">Data Analyst</strong> or <strong class="text-slate-200">Data Scientist</strong>, data analytics projects, or AI research collaborations.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <a href="mailto:ahdiahsan0@gmail.com" class="flex items-center space-x-4 p-4 rounded-xl glass-card border border-slate-800 hover:border-indigo-500/50 transition-colors group">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Direct Email</div>
+                                <div class="text-sm font-semibold text-white">ahdiahsan0@gmail.com</div>
+                            </div>
+                        </a>
+
+                        <a href="https://wa.me/6288221108571" target="_blank" class="flex items-center space-x-4 p-4 rounded-xl glass-card border border-slate-800 hover:border-emerald-500/50 transition-colors group">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Phone / WhatsApp</div>
+                                <div class="text-sm font-semibold text-white">+62 882-2110-8571</div>
+                            </div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/ahdi-nazzalul-ahsan" target="_blank" class="flex items-center space-x-4 p-4 rounded-xl glass-card border border-slate-800 hover:border-blue-500/50 transition-colors group">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">LinkedIn Profile</div>
+                                <div class="text-sm font-semibold text-white">linkedin.com/in/ahdi-nazzalul-ahsan</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Direct Message Form -->
+                <div class="lg:col-span-7 glass-panel p-8 rounded-3xl border border-slate-800">
+                    <h3 class="text-xl font-bold text-white mb-2">Send a Direct Message</h3>
+                    <p class="text-xs text-slate-400 mb-6">This form will immediately prepare an email addressed directly to Ahdi.</p>
+
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Full Name</label>
+                                <input type="text" id="sender-name" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Company / Organization</label>
+                                <input type="text" id="sender-company" placeholder="PT Tech Innovation" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Subject</label>
+                            <input type="text" id="sender-subject" required placeholder="Opportunity for Data Scientist / Analyst Position" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Your Message</label>
+                            <textarea id="sender-message" rows="4" required placeholder="Hi Ahdi, we were impressed by your portfolio and would love to discuss..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/20 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Message via Email Client</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-950 border-t border-slate-800 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                © 2026 <span class="text-slate-300 font-semibold">Ahdi Nazzalul Ahsan, B.Sc.</span> All rights reserved.
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#hero" class="hover:text-slate-300 transition-colors">Back to Top <i class="fa-solid fa-arrow-up ml-1"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Detail Modal Container -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="bg-slate-900 border border-slate-700 w-full max-w-2xl rounded-3xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto shadow-2xl">
+            <button onclick="closeProjectModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Modal Dynamic Content Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Dynamic Behaviors -->
+    <script>
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const particleCount = Math.min(60, Math.floor(window.innerWidth / 20));
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.6,
+                vy: (Math.random() - 0.5) * 0.6,
+                radius: Math.random() * 2 + 1,
+            });
+        }
+
+        function drawCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#6366f1';
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(16, 185, 129, ${1 - dist / 130})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawCanvas);
+        }
+        drawCanvas();
+
+        const roles = [
+            "Data Analyst",
+            "Data Scientist",
+            "Machine Learning Specialist",
+            "Deep Learning & CV Enthusiast"
+        ];
+        let roleIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        const typedEl = document.getElementById('typed-text');
+
+        function typeLoop() {
+            const currentRole = roles[roleIdx];
+            if (isDeleting) {
+                typedEl.textContent = currentRole.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typedEl.textContent = currentRole.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIdx === currentRole.length) {
+                typeSpeed = 1800;
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                roleIdx = (roleIdx + 1) % roles.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+        typeLoop();
+
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-indigo-600', 'text-white', 'active');
+                    b.classList.add('glass-card', 'text-slate-300');
+                });
+
+                btn.classList.add('bg-indigo-600', 'text-white', 'active');
+                btn.classList.remove('glass-card', 'text-slate-300');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        if (categories.includes(filter)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        const sliderA = document.getElementById('slider-a');
+        const sliderB = document.getElementById('slider-b');
+        const valA = document.getElementById('val-a');
+        const valB = document.getElementById('val-b');
+        const simResult = document.getElementById('sim-result');
+        const simStatus = document.getElementById('sim-status');
+
+        function updateSimulation() {
+            const vA = parseInt(sliderA.value);
+            const vB = parseInt(sliderB.value);
+            valA.textContent = vA + '%';
+            valB.textContent = vB + '%';
+
+            // Formula simulation
+            let calculated = (vA * 0.55 + vB * 0.45);
+            calculated = Math.min(99.4, Math.max(70.0, calculated));
+
+            simResult.textContent = calculated.toFixed(2) + '%';
+
+            if (calculated > 92) {
+                simStatus.textContent = "High Confidence / Optimal";
+                simStatus.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+            } else if (calculated > 82) {
+                simStatus.textContent = "Good Generalization";
+                simStatus.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40";
+            } else {
+                simStatus.textContent = "Under-Tuned Model";
+                simStatus.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40";
+            }
+        }
+
+        sliderA.addEventListener('input', updateSimulation);
+        sliderB.addEventListener('input', updateSimulation);
+
+        const modalData = {
+            pdam: {
+                title: "PDAM Revenue Optimization using Machine Learning",
+                date: "July 2026 (BNSP Certification)",
+                desc: "Comprehensive end-to-end data science project aimed at optimizing PDAM Surabaya's revenue through customer tariff category classification and water consumption cost regression modeling.",
+                details: [
+                    "Business Understanding: Identified revenue leakage points and customer usage thresholds.",
+                    "Data Validation & Cleaning: Handled missing values, outliers, and customer class imbalances.",
+                    "Feature Engineering: Extracted consumption ratios, spike frequencies, and geographic zone distribution.",
+                    "Classification Modeling: Logistic Regression & Random Forest (Optimized Precision & Recall).",
+                    "Regression Modeling: Linear Regression & Random Forest Regressor (Lowest RMSE & MAE).",
+                    "Evaluation: 5-Fold Cross Validation with strong ROC-AUC performance."
+                ],
+                tech: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "NumPy"]
+            },
+            rumah: {
+                title: "Indonesian Traditional House Image Classification",
+                date: "May 2026",
+                desc: "Image classification system for 6 types of Indonesian traditional houses based on EfficientNet-B3 with a two-stage transfer learning strategy on a dataset of 1,200 images.",
+                details: [
+                    "Dataset: 1,200 high-resolution images covering 6 popular traditional house styles across Indonesia.",
+                    "Transfer Learning Stage 1: Trained classifier head with frozen ImageNet weights.",
+                    "Transfer Learning Stage 2: Fine-tuned top layers of the EfficientNet-B3 architecture.",
+                    "Final Metrics: 96.67% Accuracy, 96.83% Precision, and 96.66% Macro F1-Score."
+                ],
+                tech: ["Python", "EfficientNet-B3", "OpenCV", "PyTorch", "NumPy"]
+            },
+            tumor: {
+                title: "Brain Tumor Classification & Detection System",
+                date: "December 2025",
+                desc: "Integrated medical AI system for brain tumor classification via EfficientNet-B0 and tumor location detection via YOLOv11.",
+                details: [
+                    "MRI Image Classification: Identified 3 main brain tumor categories with high confidence.",
+                    "Bounding Box Detection: Isolated precise lesion coordinates on brain tissue using YOLOv11.",
+                    "Web & Geolocation Platform: Helped users discover nearby medical hospital facilities interactively.",
+                    "AI Virtual Assistant: Concise medical explanation generator using Generative AI."
+                ],
+                tech: ["YOLOv11", "EfficientNet-B0", "Python", "Flask/Web", "Generative AI"]
+            },
+            offside: {
+                title: "Offside Detection System with YOLOv8",
+                date: "June 2025",
+                desc: "Real-time automated offside line decision support system for soccer matches.",
+                details: [
+                    "Object Detection: YOLOv8 trained over 50 epochs to detect players, referees, and the ball.",
+                    "Jersey Color Clustering: K-Means algorithm grouped teams by dominant jersey colors.",
+                    "Projective Geometry: Calculated field vanishing points with OpenCV line geometry to render perspective-accurate offside lines.",
+                    "Evaluation Metrics: 90.9% Precision, 83.0% Recall, and 83.2% mAP50."
+                ],
+                tech: ["YOLOv8", "OpenCV", "K-Means Clustering", "Python", "Geometry"]
+            }
+        };
+
+        function openProjectModal(key) {
+            const data = modalData[key];
+            if (!data) return;
+
+            const content = `
+                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+                    Project Details
+                </span>
+                <h3 class="text-2xl font-bold text-white mt-2">${data.title}</h3>
+                <div class="text-xs text-slate-400 font-mono mb-4">${data.date}</div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">${data.desc}</p>
+                
+                <h4 class="text-xs uppercase font-semibold text-emerald-400 tracking-wider mb-3">Key Highlights & Methodology:</h4>
+                <ul class="text-xs text-slate-300 space-y-2 mb-6 list-disc list-inside bg-slate-950 p-4 rounded-xl border border-slate-800">
+                    ${data.details.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+
+                <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2">Tech Stack:</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${data.tech.map(t => `<span class="px-3 py-1 rounded-lg bg-slate-800 text-xs font-mono text-indigo-300 border border-slate-700">${t}</span>`).join('')}
+                </div>
+            `;
+
+            document.getElementById('modal-content').innerHTML = content;
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Close modal when clicking outside box
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('project-modal');
+            if (e.target === modal) {
+                closeProjectModal();
+            }
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('sender-name').value;
+            const company = document.getElementById('sender-company').value;
+            const subject = document.getElementById('sender-subject').value;
+            const message = document.getElementById('sender-message').value;
+
+            const fullBody = `Hello Ahdi,%0D%0A%0D%0AName: ${encodeURIComponent(name)}%0D%0AOrganization: ${encodeURIComponent(company)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+            
+            window.location.href = `mailto:ahdiahsan0@gmail.com?subject=${encodeURIComponent(subject)}&body=${fullBody}`;
+        });
+    </script>
+</body>
+</html>
